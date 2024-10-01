@@ -10,13 +10,13 @@ environment:
 variables:
   modules:
     bootcamp:
-      CDF_PROJECT: cdf-bootcamp-15-test
+      CDF_PROJECT: ${CDF_PROJECT}
       IDP_CLIENT_ID: ${IDP_CLIENT_ID}
       IDP_CLIENT_SECRET: ${IDP_CLIENT_SECRET}
       IDP_TENANT_ID: ${IDP_TENANT_ID}
       # This is related to the cluster where the CDF project is hosted.
-      CDF_URL: https://westeurope-1.cognitedata.com
-      IDP_SCOPES: https://westeurope-1.cognitedata.com/.default
+      CDF_URL: https://${CDF_CLUSTER}.cognitedata.com
+      IDP_SCOPES: https://${CDF_CLUSTER}.cognitedata.com/.default
       IDP_TOKEN_URL: ${IDP_TOKEN_URL}
       # Groups
       # OBJECT ID FOR TEST/PROD DATA DEVELOPER ENTRA GROUP
