@@ -1,0 +1,43 @@
+name: Validate Pull Request - Toolkit Manifests
+
+on:
+  pull_request:
+    paths:
+      - "ice-cream-dataops/**"
+
+env:
+  PYTHON_VERSION: "3.11"
+  TOOLKIT_ENV: "test"
+  TOOLKIT_VERSION: "0.3.0b4"
+
+jobs:
+  validate-tk:
+    name: Validate Tool-Kit manifests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: install deps
+        run: |
+          pip install "cognite-toolkit==${{ env.TOOLKIT_VERSION }}"
+
+      - name: build & dry-run took-kit Manifests
+        env:
+          CDF_CLUSTER: ${{ secrets.CDF_CLUSTER }}
+          CDF_PROJECT: ${{ secrets.CDF_PROJECT_TEST }}
+          IDP_CLIENT_ID: ${{ secrets.CLIENT_ID_TEST }}
+          IDP_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET_TEST }}
+          IDP_SCOPES: ${{ secrets.IDP_SCOPES }}
+          IDP_TENANT_ID: ${{ secrets.IDP_TENANT_ID }}
+        run: |
+          cd toolkit \
+          && cdf-tk build --verbose --env ${{ env.TOOLKIT_ENV }} \
+          && cdf-tk deploy --dry-run --verbose --env ${{ env.TOOLKIT_ENV }}
