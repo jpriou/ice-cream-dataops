@@ -1,0 +1,41 @@
+name: Validate and deploy to test project
+
+on:
+  pull_request:
+    paths:
+      - "ice-cream-dataops/**"
+
+env:
+    PYTHON_VERSION: "3.11"
+    TOOLKIT_VERSION: "0.3.0b4"   
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: install dependencies
+        run: |
+          pip install "cognite-toolkit==${{ env.TOOLKIT_VERSION }}"
+
+      - name: build & dry-run took-kit Manifests
+        env:
+            CDF_CLUSTER: ${{ secrets.CDF_CLUSTER }}
+            CDF_PROJECT: ${{ secrets.CDF_PROJECT }}
+            IDP_CLIENT_ID: ${{ secrets.IDP_CLIENT_ID }}
+            IDP_CLIENT_SECRET: ${{ secrets.IDP_CLIENT_SECRET }}
+            IDP_SCOPES: ${{ secrets.IDP_SCOPES }}
+            IDP_TENANT_ID: ${{ secrets.IDP_TENANT_ID }}
+        run: |
+            cdf-tk build --verbose --env=test \
+            && cdf-tk deploy --dry-run
