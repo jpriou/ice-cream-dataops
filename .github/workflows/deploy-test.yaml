@@ -24,11 +24,12 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: install dependencies
+      - name: Install Cognite toolkit
         run: |
           pip install "cognite-toolkit==${{ env.TOOLKIT_VERSION }}"
 
-      - name: Build & deploy toolkit manifests 
+      - name: Build & deploy toolkit manifests
+        env:
             CDF_CLUSTER: ${{ secrets.CDF_CLUSTER }}
             CDF_PROJECT: ${{ secrets.CDF_PROJECT }}
             IDP_CLIENT_ID: ${{ secrets.IDP_CLIENT_ID }}
