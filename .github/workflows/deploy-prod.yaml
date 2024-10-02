@@ -1,9 +1,11 @@
-name: Validate and deploy to test project
+name: Validate and deploy to prod project
 
 on:
-  pull_request:
+  push:
     paths:
       - "ice-cream-dataops/**"
+    branches:
+      - main
 
 env:
     PYTHON_VERSION: "3.11"
@@ -12,7 +14,7 @@ env:
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    environment: test
+    environment: prod
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,5 +44,5 @@ jobs:
             ICAPI_EXTRACTORS_CLIENT_ID: ${{ secrets.ICAPI_EXTRACTORS_CLIENT_ID }}
             ICAPI_EXTRACTORS_CLIENT_SECRET: ${{ secrets.ICAPI_EXTRACTORS_CLIENT_SECRET }}
         run: |
-            cdf-tk build --verbose --env=test \
-            && cdf-tk deploy
+            cdf-tk build --verbose --env=prod \
+            && cdf-tk deploy --dry-run
