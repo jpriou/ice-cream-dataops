@@ -14,27 +14,20 @@ variables:
       IDP_CLIENT_ID: ${IDP_CLIENT_ID}
       IDP_CLIENT_SECRET: ${IDP_CLIENT_SECRET}
       IDP_TENANT_ID: ${IDP_TENANT_ID}
-      # This is related to the cluster where the CDF project is hosted.
       CDF_URL: https://${CDF_CLUSTER}.cognitedata.com
       IDP_SCOPES: https://${CDF_CLUSTER}.cognitedata.com/.default
       IDP_TOKEN_URL: ${IDP_TOKEN_URL}
       # Groups
-      # OBJECT ID FOR TEST/PROD DATA DEVELOPER ENTRA GROUP
       data_developer_source_id: c3b6782d-57fb-4d03-81c2-c3afec8ad2c2
-      # OBJECT ID FOR TEST/PROD DATA PIPELINE OEE ENTRA GROUP
       data_pipeline_oee_source_id: 93502e36-8879-46f6-aebf-b00bbd5b81b5
-      # OBJECT ID FOR TEST/PROD ADMIN TK ENTRA GROUP
       readwrite_source_id: 9a1c7da3-68fa-4747-9162-2d8e565d9179
-      # OBJECT ID FOR TEST/PROD ADMIN TK ENTRA GROUP
       readonly_source_id: 9a1c7da3-68fa-4747-9162-2d8e565d9179
-      # OBJECT ID FOR TEST/PROD ADMIN TK ENTRA GROUP
       icapi_extractors_source_id: 961b3346-85d5-4b3a-b38c-21a6317ed835
-      # Client Ids
+      # Client creds
       data_pipeline_oee_client_id: ${DATA_PIPELINE_OEE_CLIENT_ID}
       data_pipeline_oee_client_secret: ${DATA_PIPELINE_OEE_CLIENT_SECRET}
       icapi_extractors_client_id: ${ICAPI_EXTRACTORS_CLIENT_ID}
       icapi_extractors_client_secret: ${ICAPI_EXTRACTORS_CLIENT_SECRET}
-      # ice_cream_api:
       icapi_ds_external_id: ds_icapi
       use_cases:
         oee:

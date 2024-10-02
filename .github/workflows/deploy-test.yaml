@@ -19,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: install python
+      - name: Install python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -28,7 +28,7 @@ jobs:
         run: |
           pip install "cognite-toolkit==${{ env.TOOLKIT_VERSION }}"
 
-      - name: build & dry-run took-kit Manifests
+      - name: Build & deploy toolkit manifests 
         env:
             CDF_CLUSTER: ${{ secrets.CDF_CLUSTER }}
             CDF_PROJECT: ${{ secrets.CDF_PROJECT }}
@@ -36,6 +36,11 @@ jobs:
             IDP_CLIENT_SECRET: ${{ secrets.IDP_CLIENT_SECRET }}
             IDP_SCOPES: ${{ secrets.IDP_SCOPES }}
             IDP_TENANT_ID: ${{ secrets.IDP_TENANT_ID }}
+            IDP_TOKEN_URL: ${{ secrets.IDP_T }}
+            DATA_PIPELINE_OEE_CLIENT_ID: ${{ secrets.DATA_PIPELINE_OEE_CLIENT_ID }}
+            DATA_PIPELINE_OEE_CLIENT_SECRET: ${{ secrets.DATA_PIPELINE_OEE_CLIENT_SECRET }}
+            ICAPI_EXTRACTORS_CLIENT_ID: ${{ secrets.ICAPI_EXTRACTORS_CLIENT_ID }}
+            ICAPI_EXTRACTORS_CLIENT_SECRET: ${{ secrets.ICAPI_EXTRACTORS_CLIENT_SECRET }}
         run: |
             cdf-tk build --verbose --env=test \
             && cdf-tk deploy --dry-run
