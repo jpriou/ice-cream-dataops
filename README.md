@@ -14,7 +14,7 @@ $ cd ice-cream-dataops
 
 Install dependencies:
 ```sh
-poetry install
+$ poetry install
 ```
 
 Use `cdf-toolkit`:
@@ -30,4 +30,3 @@ $ cdf-tk deploy
 2 workflows are available for automated deployment:
 - `deploy-test`: deploys to the `test` project on pull request (to `main`)
 - `deploy-prod`: deploys to the `prod` project when merging to `main` (approval required)
-
