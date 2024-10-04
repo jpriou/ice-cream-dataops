@@ -45,4 +45,4 @@ jobs:
             ICAPI_EXTRACTORS_CLIENT_SECRET: ${{ secrets.ICAPI_EXTRACTORS_CLIENT_SECRET }}
         run: |
             cdf-tk build --verbose --env=prod \
-            && cdf-tk deploy --dry-run
+            && cdf-tk deploy
