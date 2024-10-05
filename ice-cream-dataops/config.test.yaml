@@ -17,7 +17,7 @@ variables:
       CDF_URL: https://${CDF_CLUSTER}.cognitedata.com
       IDP_SCOPES: https://${CDF_CLUSTER}.cognitedata.com/.default
       IDP_TOKEN_URL: ${IDP_TOKEN_URL}
-      # Groups
+      # Groups ID
       data_developer_source_id: 108560c4-c7f7-4830-bd82-568f097b283b
       data_pipeline_oee_source_id: 24e641dd-0002-4f8d-b6e7-e58033dd4899
       readwrite_source_id: 2baf7749-9fc7-4cf1-b6bf-36bdbea4c399
