@@ -20,7 +20,7 @@ $ poetry install
 Use `cdf-toolkit`:
 
 ```sh
-$ cdf-tk build --env=<test/prod>7
+$ cdf-tk build --env=<test/prod>
 $ cdf-tk deploy --dry-run
 $ cdf-tk deploy
 ```
@@ -30,3 +30,6 @@ $ cdf-tk deploy
 2 workflows are available for automated deployment:
 - `deploy-test`: deploys to the `test` project on pull request (to `main`)
 - `deploy-prod`: deploys to the `prod` project when merging to `main` (approval required)
+
+
+2 environments are also created. Each environment contains the necessary secrets to deploy to each project (`test`/`prod`). All deployment parameters common to both environments are available as repository secrets.
